@@ -1,9 +1,9 @@
 package gestao.produtos_mvc.demo.controller;
 
-import ch.qos.logback.core.model.Model;
 import gestao.produtos_mvc.demo.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,14 +24,15 @@ public class LoginController {
     }
 
     @PostMapping
-    public String autenticas(@RequestParam String email, @RequestParam String senha, HttpSession session, Model model){
+    public String autenticar(@RequestParam String email, @RequestParam String senha, HttpSession session, Model model){
         model.Usuario usuario = service.autenticar(email, senha);
 
         if(usuario != null){
             session.setAttribute("usuario", usuario);
             return "redirect:/produto";
         } else{
-            model.addAtribute("erro", "Usuário ou senha inválidos")
+            model.addAttribute("erro", "Usuário ou senha inválidos");
+            return "index";
         }
     }
 
