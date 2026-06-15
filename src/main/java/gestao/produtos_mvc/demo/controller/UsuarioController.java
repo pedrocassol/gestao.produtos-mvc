@@ -16,7 +16,7 @@ public class UsuarioController {
     private UsuarioService service = new UsuarioService();
 
     @PostMapping
-    public String cadastrar(@RequestParam String name, @RequestParam String email, @RequestParam String senha, Model model){
+    public String cadastrar(@RequestParam String nome, @RequestParam String email, @RequestParam String senha, Model model){
 
         Usuario u = new Usuario(nome, email, senha, true);
         boolean sucesso = service.inserir(u);
